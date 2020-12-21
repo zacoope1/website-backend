@@ -1,8 +1,8 @@
 package com.webservice.user;
 
 import com.webservice.common.Constants;
-import com.webservice.common.error.DuplicateDataException;
-import com.webservice.common.error.IncorrectPasswordException;
+import com.webservice.common.error.exceptions.DuplicateDataException;
+import com.webservice.common.error.exceptions.IncorrectPasswordException;
 import com.webservice.user.model.User;
 import com.webservice.user.model.requests.CreateUserRequest;
 import com.webservice.user.model.requests.UserInfoRequest;
@@ -29,7 +29,7 @@ public class UserService {
                 return user;
             }
             else {
-                throw new IncorrectPasswordException("Passwords did not match. Please try again!");
+                throw new IncorrectPasswordException();
             }
         }
         catch(Exception e) {

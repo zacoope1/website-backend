@@ -1,9 +1,9 @@
 package com.webservice.user;
 
-import com.webservice.common.error.DuplicateDataException;
+import com.webservice.common.error.exceptions.DuplicateDataException;
 import com.webservice.common.error.ErrorResponse;
-import com.webservice.common.error.IncorrectPasswordException;
-import com.webservice.common.error.UserValidationException;
+import com.webservice.common.error.exceptions.IncorrectPasswordException;
+import com.webservice.common.error.exceptions.UserValidationException;
 import com.webservice.user.model.User;
 import com.webservice.user.model.requests.CreateUserRequest;
 import com.webservice.user.model.requests.UserInfoRequest;
@@ -28,18 +28,14 @@ public class UserController {
         log.info("Getting user info for email: {}", request.getEmail());
 
         try {
-
             UserInfo userInfo = userHandler.getUserInfo(request);
             return new ResponseEntity<UserInfo>(userInfo, HttpStatus.OK);
-
         }
         catch(IncorrectPasswordException e){
-            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage(e.getMessage()).build(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage(e.getMessage()).build(), HttpStatus.UNAUTHORIZED);
         }
         catch(Exception e){
-
             return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage("An invalid request was made").build(), HttpStatus.BAD_REQUEST);
-
         }
 
     }
@@ -47,7 +43,7 @@ public class UserController {
     @GetMapping("/create/user")
     public ResponseEntity<?> createUser(@RequestBody CreateUserRequest request){
 
-        log.info("Creating user with username: {} with email: {}", request.getUsername(), request.getEmail());
+        log.info("Creating user with username: {} and email: {}", request.getUsername(), request.getEmail());
 
         try {
             User user = userHandler.createUser(request);

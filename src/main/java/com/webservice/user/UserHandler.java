@@ -1,8 +1,5 @@
 package com.webservice.user;
 
-import com.webservice.common.error.DuplicateDataException;
-import com.webservice.common.error.IncorrectPasswordException;
-import com.webservice.common.error.UserValidationException;
 import com.webservice.common.validator.UserValidator;
 import com.webservice.user.model.User;
 import com.webservice.user.model.UserInfo;
@@ -21,6 +18,7 @@ public class UserHandler {
 
     public UserInfo getUserInfo(UserInfoRequest request) throws Exception {
         try {
+            userValidator.validateGetUserInfoRequest(request);
             User user = userService.getUserInfo(request);
             return UserInfo.builder()
                     .username(user.getUsername())
@@ -40,7 +38,7 @@ public class UserHandler {
 
         try {
             log.info("Validating Create User Request");
-            userValidator.validateCreateUser(request);
+            userValidator.validateCreateUserRequest(request);
 
             return userService.createUser(request);
         }
