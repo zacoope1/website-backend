@@ -1,12 +1,14 @@
 package com.webservice.user;
 
+import com.webservice.common.Constants;
 import com.webservice.common.error.DuplicateDataException;
+import com.webservice.common.error.IncorrectPasswordException;
 import com.webservice.user.model.User;
 import com.webservice.user.model.requests.CreateUserRequest;
+import com.webservice.user.model.requests.UserInfoRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -16,6 +18,25 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    public User getUserInfo(UserInfoRequest request) throws IncorrectPasswordException {
+        try {
+            User user = userRepository.getUserInfo(request.getEmail());
+
+            log.info("Retrieved {}", user.getUsername());
+
+            if (user.getPassword().equals(request.getPassword())){
+                return user;
+            }
+            else {
+                throw new IncorrectPasswordException("Passwords did not match. Please try again!");
+            }
+        }
+        catch(Exception e) {
+            log.error(e.toString());
+            throw e;
+        }
+    }
 
     public User createUser(CreateUserRequest request) throws Exception {
 
@@ -39,12 +60,12 @@ public class UserService {
         }
         catch (Exception e) {
             log.error("An error occurred while creating user.");
-            log.error("__ERROR__: " + e.toString());
-            if(e.toString().contains("DataIntegrityViolationException")){
-                if(e.toString().toLowerCase().contains("username")){
+            log.error(e.toString());
+            if(e.toString().contains(Constants.DATA_INTEGRITY_VIOLATION_EXCEPTION)){
+                if(e.toString().toLowerCase().contains(Constants.USERNAME)){
                     throw new DuplicateDataException("Username is already in use. Please try a new one.");
                 }
-                else if(e.toString().toLowerCase().contains("email")){
+                else if(e.toString().toLowerCase().contains(Constants.EMAIL)){
                     throw new DuplicateDataException("Email is already in use. Please try a new one.");
                 }
                 else{

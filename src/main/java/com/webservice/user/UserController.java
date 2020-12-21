@@ -2,6 +2,7 @@ package com.webservice.user;
 
 import com.webservice.common.error.DuplicateDataException;
 import com.webservice.common.error.ErrorResponse;
+import com.webservice.common.error.IncorrectPasswordException;
 import com.webservice.common.error.UserValidationException;
 import com.webservice.user.model.User;
 import com.webservice.user.model.requests.CreateUserRequest;
@@ -28,9 +29,12 @@ public class UserController {
 
         try {
 
-            UserInfo userInfo;
-            return new ResponseEntity<>(HttpStatus.OK);
+            UserInfo userInfo = userHandler.getUserInfo(request);
+            return new ResponseEntity<UserInfo>(userInfo, HttpStatus.OK);
 
+        }
+        catch(IncorrectPasswordException e){
+            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage(e.getMessage()).build(), HttpStatus.BAD_REQUEST);
         }
         catch(Exception e){
 

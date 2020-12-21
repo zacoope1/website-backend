@@ -1,7 +1,9 @@
 package com.webservice.user.model;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 public class UserInfo {
 
