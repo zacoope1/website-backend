@@ -1,11 +1,14 @@
 CREATE TABLE webservice.user_table (
-	username text NOT NULL,
+	id int primary key,
+	username text NOT null UNIQUE,
 	"password" text NOT NULL,
 	first_name text NULL,
 	last_name text NULL,
-	account_created_date date NULL,
-	email text NOT NULL,
-	user_uuid text NOT NULL
+	account_created_date text NULL,
+	email text NOT null UNIQUE,
+	user_uuid text not null UNIQUE
 );
 
 select * from webservice.user_table;
+
+delete from webservice.user_table where id >= 0;

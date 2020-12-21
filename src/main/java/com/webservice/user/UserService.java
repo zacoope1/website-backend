@@ -1,5 +1,6 @@
 package com.webservice.user;
 
+import com.webservice.common.error.DuplicateDataException;
 import com.webservice.user.model.User;
 import com.webservice.user.model.requests.CreateUserRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User createUser(CreateUserRequest request){
+    public User createUser(CreateUserRequest request) throws Exception {
 
         LocalDate date = LocalDate.now();
         String dateText = date.toString();
@@ -37,9 +38,23 @@ public class UserService {
             return user;
         }
         catch (Exception e) {
-            log.error("An error ocurred while creating user.");
-            log.error(e.toString());
-            throw e;
+            log.error("An error occurred while creating user.");
+            log.error("__ERROR__: " + e.toString());
+            if(e.toString().contains("DataIntegrityViolationException")){
+                if(e.toString().toLowerCase().contains("username")){
+                    throw new DuplicateDataException("Username is already in use. Please try a new one.");
+                }
+                else if(e.toString().toLowerCase().contains("email")){
+                    throw new DuplicateDataException("Email is already in use. Please try a new one.");
+                }
+                else{
+                    throw new Exception();
+                }
+            }
+            else {
+                throw e;
+            }
+
         }
 
     }

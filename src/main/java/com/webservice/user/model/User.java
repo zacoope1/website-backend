@@ -2,6 +2,7 @@ package com.webservice.user.model;
 
 import lombok.Builder;
 import lombok.Data;
+
 import javax.persistence.*;
 
 @Builder
@@ -11,6 +12,9 @@ import javax.persistence.*;
 public class User {
 
     @Id
+    @GeneratedValue()
+    private int id;
+
     @Column(name="user_uuid")
     private String userUuid;
 
@@ -31,5 +35,27 @@ public class User {
 
     @Column(name="password")
     private String password;
+
+    public User(int id, String userUuid, String username, String email, String firstName, String lastName, String accountCreatedDate, String password) {
+        this.id = id;
+        this.userUuid = userUuid;
+        this.username = username.toLowerCase();
+        this.email = email.toLowerCase();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.accountCreatedDate = accountCreatedDate;
+        this.password = password;
+    }
+
+    public User() {
+        this.id = 0;
+        this.userUuid = "";
+        this.username = "";
+        this.email = "";
+        this.firstName = "";
+        this.lastName = "";
+        this.accountCreatedDate = "";
+        this.password = "";
+    }
 
 }

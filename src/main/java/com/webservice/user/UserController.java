@@ -1,5 +1,6 @@
 package com.webservice.user;
 
+import com.webservice.common.error.DuplicateDataException;
 import com.webservice.common.error.ErrorResponse;
 import com.webservice.common.error.UserValidationException;
 import com.webservice.user.model.User;
@@ -49,10 +50,13 @@ public class UserController {
             return new ResponseEntity<User>(user, HttpStatus.CREATED);
         }
         catch (UserValidationException e){
-            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage("An invalid request was made").build(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage("An invalid request was made. Please try again!").build(), HttpStatus.BAD_REQUEST);
+        }
+        catch(DuplicateDataException e){
+            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage(e.getMessage()).build(), HttpStatus.BAD_REQUEST);
         }
         catch(Exception e){
-            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage("An error occurred while attempting to create a new user").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage("An error occurred while attempting to create a new user. Please try again!").build(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
