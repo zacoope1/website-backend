@@ -36,7 +36,10 @@ public class User {
     @Column(name="password")
     private String password;
 
-    public User(int id, String userUuid, String username, String email, String firstName, String lastName, String accountCreatedDate, String password) {
+    @Column(name="salt")
+    private String salt;
+
+    public User(int id, String userUuid, String username, String email, String firstName, String lastName, String accountCreatedDate, String password, String salt) {
         this.id = id;
         this.userUuid = userUuid;
         this.username = username.toLowerCase();
@@ -45,6 +48,7 @@ public class User {
         this.lastName = lastName;
         this.accountCreatedDate = accountCreatedDate;
         this.password = password;
+        this.salt = salt;
     }
 
     public User() {
@@ -56,6 +60,7 @@ public class User {
         this.lastName = "";
         this.accountCreatedDate = "";
         this.password = "";
+        this.salt = "";
     }
 
 }

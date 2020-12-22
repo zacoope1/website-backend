@@ -8,7 +8,7 @@ import com.webservice.user.model.requests.UserInfoRequest;
 public class UserValidator {
 
     public void validateGetUserInfoRequest(UserInfoRequest request) throws UserValidationException {
-        if ((request.getEmail().isEmpty()) || (request.getEmail() == null)) {
+        if ((request.getUsername().isEmpty()) || (request.getUsername() == null)) {
             throw new UserValidationException();
         }
         if ((request.getPassword().isEmpty()) || (request.getPassword() == null)) {
