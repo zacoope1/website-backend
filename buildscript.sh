@@ -22,4 +22,6 @@ sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.prop
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
 echo 'Replacing application.properties file'
 
+sudo chmod +x runscript.sh
+
 sudo -u jenkins screen -dmS website_backend bash -c 'cd /mnt/dev1/development/microservice/website-backend && ./runscript.sh; exec sh'
