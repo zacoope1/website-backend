@@ -29,6 +29,4 @@ echo 'Replacing application.properties file'
 
 cd website-backend/
 
-export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"
-
-mvn clean install && ./mvnw spring-boot:run 
+screen -dmS website_backend bash -c 'export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64" && cd /mnt/dev1/development/microservice/website-backend && mvn clean install && ./mvnw spring-boot:run; exec sh'
