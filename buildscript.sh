@@ -24,4 +24,4 @@ echo 'Replacing application.properties file'
 
 sudo chmod +x runscript.sh
 
-sudo -u jenkins screen -dmS website_backend bash -c 'cd /mnt/dev1/development/microservice/website-backend && ./runscript.sh; exec sh'
+sudo -u jenkins screen -dmS website_backend bash -c 'whoami && cd /mnt/dev1/development/microservice/website-backend && ./runscript.sh; exec sh'
