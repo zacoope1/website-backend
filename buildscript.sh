@@ -1,6 +1,6 @@
 MICROSERVICES_PATH='/mnt/dev1/development/microservice/'
 
-screen -S website-backend -X quit
+screen -S website_backend -X quit
 echo 'Terminating current build'
 
 sudo rm -rf ${MICROSERVICES_PATH}website-backend-old
@@ -30,4 +30,4 @@ mvn -version
 cd ${MICROSERVICES_PATH}website-backend
 echo 'moving to /mnt/dev1/development/microservice/website-backend'
 
-mvn clean install && echo 'Running maven clean install.' && sudo chmod +x mvnw && echo 'Setting permissions to mvnw' && screen -dmS website-backend bash -c 'mvnw spring-boot:run; exec sh' && echo 'Created screen session' && echo 'Done!'
+mvn clean install && echo 'Running maven clean install.' && screen -dmS website_backend bash -c 'sudo chmod +x mvnw; ./mvnw spring-boot:run; exec sh' && echo 'Setting permissions to mvnw. Created screen session.' && echo 'Done!'
