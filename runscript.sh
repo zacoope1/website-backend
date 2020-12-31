@@ -1,0 +1,2 @@
+# sudo -u jenkins screen -dmS website_backend bash -c 'export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64" && cd /mnt/dev1/development/microservice/website-backend && mvn clean install && sudo chmod +x mvnw && ./mvnw spring-boot:run; exec sh' && echo 'Setting permissions to mvnw. Created screen session.' && echo 'Done!'
+echo 'hello, world!'
