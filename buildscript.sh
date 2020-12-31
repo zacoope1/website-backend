@@ -1,6 +1,6 @@
 MICROSERVICES_PATH='/mnt/dev1/development/microservice/'
 
-screen -S website_backend -X quit
+sudo -u jenkins screen -S website_backend -X quit
 echo 'Terminating current build'
 
 sudo rm -rf ${MICROSERVICES_PATH}website-backend-old
