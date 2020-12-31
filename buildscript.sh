@@ -26,13 +26,11 @@ mvn -version
 
 cd ${MICROSERVICES_PATH}website-backend
 
-mvn clean install
-echo 'Running maven clean install.'
+mvn clean install 
+    && echo 'Running maven clean install.' 
+    && chmod +x mvnw 
+    && echo 'Setting permissions to mvnw' 
+    && screen -dmS website-backend bash -c './mvnw spring-boot:run; exec sh' 
+    && echo 'Created screen session' 
+    && echo 'Done!'
 
-chmod +x mvnw
-echo 'Setting permissions to mvnw'
-
-screen -dmS website-backend bash -c './mvnw spring-boot:run; exec sh'
-echo 'Created screen session'
-
-echo 'Done!'
