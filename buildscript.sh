@@ -15,16 +15,19 @@ echo 'Removing current build.'
 sudo cp -r /var/lib/jenkins/workspace/Back-End-Microservice ${MICROSERVICES_PATH}/website-backend
 echo 'Copying new build to current build directory.'
 
-sudo chown -R jenkins website-backend/
+cd ${MICROSERVICES_PATH}
 
-sudo chmod 777 ${MICROSERVICES_PATH}/website-backend
+sudo chown -R jenkins website-backend/
+sudo chmod 777 website-backend/
+sudo chmod +x website-backend/mvnw
+sudo chmod +x website-backend/mvnw.cmd
 echo 'setting permissions to directory'
 
 sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.properties
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
 echo 'Replacing application.properties file'
 
-cd ${MICROSERVICES_PATH}website-backend/
+cd website-backend/
 
 export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"
 
