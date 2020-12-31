@@ -30,4 +30,4 @@ mvn -version
 cd ${MICROSERVICES_PATH}website-backend
 echo 'moving to /mnt/dev1/development/microservice/website-backend'
 
-mvn clean install && echo 'Running maven clean install.' && screen -dmS website_backend bash -c 'cd /mnt/dev1/development/microservice/web-service && sudo chmod +x mvnw && ./mvnw spring-boot:run; exec sh' && echo 'Setting permissions to mvnw. Created screen session.' && echo 'Done!'
+mvn clean install && echo 'Running maven clean install.' && screen -dmS website_backend bash -c 'cd /mnt/dev1/development/microservice/website-backend && sudo chmod +x mvnw && ./mvnw spring-boot:run; exec sh' && echo 'Setting permissions to mvnw. Created screen session.' && echo 'Done!'
