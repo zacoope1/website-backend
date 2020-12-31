@@ -24,4 +24,8 @@ sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.prop
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
 echo 'Replacing application.properties file'
 
+cd ${MICROSERVICES_PATH}website-backend/
+
+export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"
+
 mvn clean install && ./mvnw spring-boot:run 
