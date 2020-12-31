@@ -16,6 +16,7 @@ sudo cp -r /var/lib/jenkins/workspace/Back-End-Microservice ${MICROSERVICES_PATH
 echo 'Copying new build to current build directory.'
 
 cd ${MICROSERVICES_PATH}
+echo 'moving into $(pwd)'
 
 sudo chown -R jenkins website-backend/
 sudo chmod 777 website-backend/
@@ -28,5 +29,7 @@ sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH
 echo 'Replacing application.properties file'
 
 cd website-backend/
+echo 'moving into $(pwd)'
 
-sudo -u jenkins screen -dmS website_backend bash -c 'export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64" && cd /mnt/dev1/development/microservice/website-backend && mvn clean install && ./mvnw spring-boot:run; exec sh'
+sudo -u jenkins screen -dmS website_backend bash -c 'clear && export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64" && cd /mnt/dev1/development/microservice/website-backend && mvn clean install && ./mvnw spring-boot:run; exec sh'
+echo 'Started service as a screen under user jenkins'
