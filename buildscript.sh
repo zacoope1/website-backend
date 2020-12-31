@@ -16,7 +16,7 @@ sudo cp -r website-backend/ ${MICROSERVICES_PATH}
 echo 'Copying new build to current build directory.'
 
 sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.properties
-sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}/website-backend/src/main/resources/
+sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
 echo 'Replacing application.properties file'
 
 export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"
@@ -34,8 +34,5 @@ echo 'Setting permissions to mvnw'
 
 screen -dmS website-backend bash -c './mvnw spring-boot:run; exec sh'
 echo 'Created screen session'
-
-# echo 'Booting up backend.'
-# ./mvnw spring-boot:run
 
 echo 'Done!'
