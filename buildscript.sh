@@ -22,12 +22,4 @@ sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.prop
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
 echo 'Replacing application.properties file'
 
-export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"
-echo 'Setting JAVA_HOME to JAVA 14.'
-
-mvn -version
-
-cd ${MICROSERVICES_PATH}website-backend
-echo 'moving to /mnt/dev1/development/microservice/website-backend'
-
-mvn clean install && echo 'Running maven clean install.' && screen -dmS website_backend bash -c 'cd /mnt/dev1/development/microservice/website-backend && sudo chmod +x mvnw && ./mvnw spring-boot:run; exec sh' && echo 'Setting permissions to mvnw. Created screen session.' && echo 'Done!'
+export JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64" && echo 'Setting JAVA_HOME to JAVA 14.' && mvn clean install && echo 'Running maven clean install.' && screen -dmS website_backend bash -c 'cd /mnt/dev1/development/microservice/website-backend && sudo chmod +x mvnw && ./mvnw spring-boot:run; exec sh' && echo 'Setting permissions to mvnw. Created screen session.' && echo 'Done!'
