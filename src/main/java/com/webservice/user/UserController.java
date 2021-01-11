@@ -24,7 +24,7 @@ public class UserController {
 
     @Autowired UserHandler userHandler;
 
-    @GetMapping("/user")
+    @PostMapping("/user")
     public ResponseEntity<?> getUserInfo(@RequestBody UserInfoRequest request) {
 
         log.info("Getting user info for username: {}", request.getUsername());
