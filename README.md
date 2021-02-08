@@ -1,8 +1,6 @@
 <h1>Portfolio Microservice</h1>
 <h3>@Author: Zachary Cooper</h3>
 <h4>**START COMMAND: <code>.\mvnw spring-boot:run</code></h4>
-<br/>
-<br/>
 <h1>Features</h1>
 <h4>User</h4>
 <p>This service currently supports user account creation and user login.</p>
