@@ -26,7 +26,7 @@ echo 'setting permissions to directory'
 
 sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.properties
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
-sudo cp ${MICROSERVICES_PATH}configs/zacharycooper-ssl-key.p12 ${MICROSERVICES_PATH}website-backend/src/main/resources/
+sudo cp ${MICROSERVICES_PATH}configs/zacharycooper-ssl.p12 ${MICROSERVICES_PATH}website-backend/src/main/resources/
 echo 'Replacing application.properties file and copying ssl key'
 
 cd website-backend/
