@@ -1,5 +1,4 @@
 MICROSERVICES_PATH='/mnt/dev1/development/microservice/'
-RESOURCES_PATH='/mnt/dev1/development/microservice/configs'
 
 sudo -u jenkins screen -S website_backend -X quit
 echo 'Terminating current build'
