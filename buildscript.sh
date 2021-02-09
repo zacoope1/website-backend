@@ -1,4 +1,5 @@
 MICROSERVICES_PATH='/mnt/dev1/development/microservice/'
+RESOURCES_PATH='/mnt/dev1/development/microservice/configs'
 
 sudo -u jenkins screen -S website_backend -X quit
 echo 'Terminating current build'
@@ -26,7 +27,8 @@ echo 'setting permissions to directory'
 
 sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.properties
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
-echo 'Replacing application.properties file'
+sudo cp ${MICROSERVICES_PATH}configs/zacharycooper-ssl-key.p12 ${MICROSERVICES_PATH}website-backend/src/main/resources/
+echo 'Replacing application.properties file and copying ssl key'
 
 cd website-backend/
 echo 'moving into $(pwd)'
