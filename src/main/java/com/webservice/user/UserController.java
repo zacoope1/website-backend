@@ -21,7 +21,7 @@ public class UserController {
 
     @Autowired UserHandler userHandler;
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/user")
     public ResponseEntity<?> getUserInfo(@RequestBody UserInfoRequest request) {
 
@@ -43,7 +43,7 @@ public class UserController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/create/user")
     public ResponseEntity<?> createUser(@RequestBody CreateUserRequest request){
 
