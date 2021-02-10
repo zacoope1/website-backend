@@ -51,7 +51,15 @@ public class UserController {
 
         try {
             User user = userHandler.createUser(request);
-            return new ResponseEntity<User>(user, HttpStatus.CREATED);
+            UserInfo returnUser = UserInfo.builder()
+                    .email(user.getEmail())
+                    .userUuid(user.getUserUuid())
+                    .username(user.getUsername())
+                    .firstName(user.getFirstName())
+                    .lastName(user.getLastName())
+                    .accountCreatedDate(user.getAccountCreatedDate())
+                    .build();
+            return new ResponseEntity<UserInfo>(returnUser, HttpStatus.CREATED);
         }
         catch (UserValidationException e){
             return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage("An invalid request was made. Please try again!").build(), HttpStatus.BAD_REQUEST);
