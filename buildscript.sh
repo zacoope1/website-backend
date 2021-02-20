@@ -29,9 +29,10 @@ echo 'setting permissions to directory'
 
 sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.properties
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
-${MICROSERVICES_PATH}configs/jenkins_keyupdate.sh
-echo 'Replacing application.properties file and copying ssl key'
+echo 'Replacing application.properties file'
 
+${MICROSERVICES_PATH}configs/jenkins_keyupdate.sh
+echo 'Recreating SSL Key'
 
 cd website-backend/
 echo 'moving into $(pwd)'
