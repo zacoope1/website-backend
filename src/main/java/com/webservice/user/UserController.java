@@ -1,19 +1,19 @@
 package com.webservice.user;
 
-import com.webservice.common.error.exceptions.DuplicateDataException;
+import com.webservice.common.error.exceptions.*;
 import com.webservice.common.error.ErrorResponse;
-import com.webservice.common.error.exceptions.IncorrectPasswordException;
-import com.webservice.common.error.exceptions.UserNotFoundException;
-import com.webservice.common.error.exceptions.UserValidationException;
 import com.webservice.user.model.User;
 import com.webservice.user.model.requests.CreateUserRequest;
 import com.webservice.user.model.requests.UserInfoRequest;
 import com.webservice.user.model.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.security.auth.login.CredentialException;
 
 @Slf4j
 @RestController
@@ -35,6 +35,28 @@ public class UserController {
             return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage(e.getMessage()).build(), HttpStatus.NOT_FOUND);
         }
         catch(IncorrectPasswordException e){
+            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage(e.getMessage()).build(), HttpStatus.UNAUTHORIZED);
+        }
+        catch(Exception e){
+            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage("An invalid request was made").build(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @CrossOrigin
+    @GetMapping("/user/session")
+    public ResponseEntity<?> getUserInfoFromSession(@RequestParam(required = true) String sessionUuid, @RequestParam(required = true) String userUuid) {
+
+        log.info("Getting user info for user: {} with session: {}", userUuid, sessionUuid);
+
+        try {
+            UserInfo userInfo = userHandler.getUserInfoFromSession(sessionUuid, userUuid);
+            return new ResponseEntity<UserInfo>(userInfo, HttpStatus.OK);
+        }
+        catch(SessionNotFoundException e){
+            return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage(e.getMessage()).build(), HttpStatus.NOT_FOUND);
+        }
+        catch(CredentialException e){
             return new ResponseEntity<ErrorResponse>(ErrorResponse.builder().errorMessage(e.getMessage()).build(), HttpStatus.UNAUTHORIZED);
         }
         catch(Exception e){

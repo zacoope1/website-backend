@@ -10,6 +10,11 @@ CREATE TABLE webservice.user_table (
 	user_uuid text not null UNIQUE
 );
 
-select * from webservice.user_table;
-
-delete from webservice.user_table where id >= 0;
+CREATE TABLE webservice.session_table (
+	id int primary key,
+	user_uuid text NOT null,
+	session_uuid text not null,
+	session_create_date text not null,
+	foreign key (user_uuid)
+		references webservice.user_table(user_uuid)
+);
