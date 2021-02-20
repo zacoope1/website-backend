@@ -29,7 +29,7 @@ echo 'setting permissions to directory'
 
 sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.properties
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
-${MICROSERVICES_PATH}configs/keyupdate.sh
+${MICROSERVICES_PATH}configs/jenkins_keyupdate.sh
 echo 'Replacing application.properties file and copying ssl key'
 
 
