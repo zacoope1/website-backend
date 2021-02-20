@@ -15,6 +15,9 @@ echo 'Removing current build.'
 sudo cp -r /var/lib/jenkins/workspace/Back-End-Microservice ${MICROSERVICES_PATH}/website-backend
 echo 'Copying new build to current build directory.'
 
+sudo rm ${KEY_PATH}/zacharycooper-ssl.p12
+echo 'deleting old ssl key'
+
 cd ${MICROSERVICES_PATH}
 echo 'moving into $(pwd)'
 
@@ -26,8 +29,9 @@ echo 'setting permissions to directory'
 
 sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.properties
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
-sudo cp ${MICROSERVICES_PATH}configs/zacharycooper-ssl.p12 ${MICROSERVICES_PATH}website-backend/src/main/resources/
+${MICROSERVICES_PATH}configs/keyupdate.sh
 echo 'Replacing application.properties file and copying ssl key'
+
 
 cd website-backend/
 echo 'moving into $(pwd)'
