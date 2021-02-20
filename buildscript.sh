@@ -34,6 +34,9 @@ echo 'Replacing application.properties file'
 ${MICROSERVICES_PATH}configs/jenkins_keyupdate.sh
 echo 'Recreating SSL Key'
 
+sudo cp ${MICROSERVICES_PATH}configs/zacharycooper-ssl.p12  ${MICROSERVICES_PATH}website-backend/src/main/resources/
+echo 'Copying SSL Key to Project Resources Folder'
+
 cd website-backend/
 echo 'moving into $(pwd)'
 
