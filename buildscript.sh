@@ -31,6 +31,9 @@ sudo rm ${MICROSERVICES_PATH}website-backend/src/main/resources/application.prop
 sudo cp ${MICROSERVICES_PATH}configs/application.properties ${MICROSERVICES_PATH}website-backend/src/main/resources/
 echo 'Replacing application.properties file'
 
+cd ${MICROSERVICES_PATH}configs
+echo 'moving into $(pwd)'
+
 ${MICROSERVICES_PATH}configs/jenkins_keyupdate.sh
 echo 'Recreating SSL Key'
 
