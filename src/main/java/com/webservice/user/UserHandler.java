@@ -1,6 +1,9 @@
 package com.webservice.user;
 
-import com.webservice.common.validator.UserValidator;
+import com.webservice.common.error.exceptions.IncorrectPasswordException;
+import com.webservice.common.error.exceptions.UserNotFoundException;
+import com.webservice.common.error.exceptions.UserValidationException;
+import com.webservice.common.validator.UserRequestValidator;
 import com.webservice.session.SessionService;
 import com.webservice.user.model.User;
 import com.webservice.user.model.UserInfo;
@@ -16,11 +19,35 @@ public class UserHandler {
 
     @Autowired UserService userService;
     @Autowired SessionService sessionService;
-    UserValidator userValidator = new UserValidator();
+    UserRequestValidator userRequestValidator = new UserRequestValidator();
+
+    public User validateUserCredentials(UserInfoRequest request) throws Exception {
+
+        log.info("Validating user credentials...");
+
+        try {
+            userRequestValidator.validateGetUserInfoRequest(request);
+            User user = userService.getUserInfo(request);
+
+            if (user != null) {
+                log.info("Credentials Valid!");
+                return user;
+            } else {
+                log.error("Credentials invalid!");
+                return null;
+            }
+
+        }
+        catch(Exception e){
+            log.error(e.getMessage().toString());
+            throw e;
+        }
+
+    }
 
     public UserInfo getUserInfo(UserInfoRequest request) throws Exception {
         try {
-            userValidator.validateGetUserInfoRequest(request);
+            userRequestValidator.validateGetUserInfoRequest(request);
             User user = userService.getUserInfo(request);
             return UserInfo.builder()
                     .username(user.getUsername())
@@ -57,7 +84,7 @@ public class UserHandler {
 
         try {
             log.info("Validating Create User Request");
-            userValidator.validateCreateUserRequest(request);
+            userRequestValidator.validateCreateUserRequest(request);
 
             return userService.createUser(request);
         }

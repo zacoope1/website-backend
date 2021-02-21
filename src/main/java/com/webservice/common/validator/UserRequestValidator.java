@@ -5,7 +5,7 @@ import com.webservice.user.model.requests.CreateUserRequest;
 import com.webservice.user.model.requests.UserInfoRequest;
 
 
-public class UserValidator {
+public class UserRequestValidator {
 
     public void validateGetUserInfoRequest(UserInfoRequest request) throws UserValidationException {
         if ((request.getUsername().isEmpty()) || (request.getUsername() == null)) {

@@ -7,7 +7,7 @@ CREATE TABLE webservice.user_table (
 	last_name text NULL,
 	account_created_date text NULL,
 	email text NOT null UNIQUE,
-	user_uuid text not null UNIQUE
+	user_uuid text not null unique
 );
 
 CREATE TABLE webservice.session_table (
@@ -16,5 +16,5 @@ CREATE TABLE webservice.session_table (
 	session_uuid text not null,
 	session_create_date text not null,
 	foreign key (user_uuid)
-		references webservice.user_table(user_uuid)
+		references webservice.user_table(user_uuid) on delete CASCADE
 );
