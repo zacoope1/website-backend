@@ -79,6 +79,7 @@ public class SessionController {
     }
 
     /* createSession() is an Exposed API for testing purposes only */
+    @CrossOrigin
     @PostMapping("/create-session")
     public ResponseEntity<?> createSession(@RequestBody SessionCreateRequest request){
 

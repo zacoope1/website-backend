@@ -74,6 +74,7 @@ public class UserController {
     }
 
     /* getUserInfo() is an Exposed API for testing purposes only */
+    @CrossOrigin
     @PostMapping("/user")
     public ResponseEntity<?> getUserInfo(@RequestBody UserInfoRequest request) {
 
