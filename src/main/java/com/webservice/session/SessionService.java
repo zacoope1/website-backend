@@ -89,7 +89,7 @@ public class SessionService {
         return session;
     }
 
-    public String deleteSession(SessionDeleteRequest request){
+    public String deleteSession(SessionDeleteRequest request) throws Exception {
         log.info("Deleting session entity.");
         try {
             Session session = sessionRepository.getSession(request.getSessionUuid());
@@ -99,7 +99,7 @@ public class SessionService {
         }
         catch (Exception e){
             log.error(e.getMessage().toString());
-            throw e;
+            throw new SessionNotFoundException();
         }
 
     }

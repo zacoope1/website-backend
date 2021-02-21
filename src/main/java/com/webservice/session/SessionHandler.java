@@ -27,7 +27,7 @@ public class SessionHandler {
 
     }
 
-    public String deleteSession(SessionDeleteRequest request) {
+    public String deleteSession(SessionDeleteRequest request) throws Exception {
 
         try {
             return sessionService.deleteSession(request);
