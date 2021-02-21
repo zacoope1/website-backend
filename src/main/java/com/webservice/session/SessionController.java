@@ -40,7 +40,9 @@ public class SessionController {
             String userUuid = userHandler.validateUserCredentials(request).getUserUuid();
 
             if(userUuid != null){
-                session = sessionHandler.createSession(SessionCreateRequest.builder().userUuid(userUuid).build());
+                SessionCreateRequest request1 = new SessionCreateRequest();
+                request1.setUserUuid(userUuid);
+                session = sessionHandler.createSession(request1);
 
                 SessionResponse response = SessionResponse.builder()
                         .sessionUuid(session.getSessionUuid())
